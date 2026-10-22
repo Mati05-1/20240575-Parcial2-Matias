@@ -1,0 +1,23 @@
+meta {
+  name: Cobro tope un dia
+  type: http
+  seq: 16
+}
+
+post {
+  url: {{baseUrl}}/tickets/{{topeDiaId}}/salida
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "salida": "2026-10-23T08:00:00"
+  }
+}
+
+assert {
+  res.status: eq 200
+  res.body.minutos: eq 1440
+  res.body.monto: eq 60
+}
